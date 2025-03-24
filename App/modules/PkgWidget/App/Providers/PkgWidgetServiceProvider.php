@@ -12,6 +12,8 @@ class PkgWidgetServiceProvider extends ServiceProvider
     public function register(): void
     {
                 $this->loadViewsFrom(__DIR__ . '/../../Views', 'PkgWidget');
+                $this->loadTranslationsFrom(__DIR__.'/../../lang', 'PkgWidget');
+
     }
 
     /**

@@ -30,11 +30,11 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>id</th>
-                    <th>name</th>
-                    <th>method</th>
-                    <th>type</th>
-                    <th>action</th>
+                    <th>Id</th>
+                    <th>{{ __('PkgWidget::widget.name')}}</th>
+                    <th>{{ __('PkgWidget::widget.method')}}</th>
+                    <th>{{ __('PkgWidget::widget.type')}}</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>

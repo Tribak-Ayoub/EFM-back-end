@@ -24,7 +24,7 @@ class StoreWidgetRequest extends FormRequest
         return [
             "name" => 'required|string|max:255',
             "method" => 'required|string|max:255',
-            "type" => 'required',
+            "type" => 'required|in:number,list',
         ];
     }
 }
