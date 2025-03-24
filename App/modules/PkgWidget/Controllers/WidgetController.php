@@ -4,6 +4,8 @@ namespace Modules\PkgWidget\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Modules\PkgWidget\App\Requests\StoreWidgetRequest;
+use Modules\PkgWidget\App\Requests\UpdateWidgetRequest;
 use Modules\PkgWidget\App\Services\WidgetService;
 use Modules\PkgWidget\Models\Widget;
 
@@ -36,15 +38,10 @@ class WidgetController extends Controller
         return view('PkgWidget::create');
     }
 
-    public function store(Request $request)
+    public function store(StoreWidgetRequest $request)
     {
 
-        $validated = $request->validate(
-            [
-                "name" => 'required|string|max:255',
-                "method" => 'required|string|max:255',
-            ]
-        );
+        $validated = $request->validated();
         $this->widgetService->createWidget($validated);
 
         return redirect()->route('index');
@@ -64,14 +61,9 @@ class WidgetController extends Controller
         return view('PkgWidget::edit', compact('widget'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateWidgetRequest $request, $id)
     {
-        $validated = $request->validate(
-            [
-                "name" => 'required|string|max:255',
-                "method" => 'required|string|max:255',
-            ]
-        );
+        $validated = $request->validated();
         $widgets = Widget::findOrFail($id);
         $this->widgetService->updateWidget($widgets, $validated);
 

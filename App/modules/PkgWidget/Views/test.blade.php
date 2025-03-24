@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>Test Widget</title>
     <style>
         body {
@@ -22,32 +23,45 @@
 <body>
     <div>
         <h1>list of widgets</h1>
-        @foreach($widgets as $widget)
+        <div>
+            <a href="{{ route('create') }}">new widget</a>
+        </div>
+
         <table class="table table-bordered">
-            <th>
-                <tr>name</tr>
-                <tr>method</tr>
-                <tr>type</tr>
-                <tr>action</tr>
-            </th>
-            <th>
-            <td>{{$widget->name}}</td>
-            <td>{{$widget->method}}</td>
-            <td>{{$widget->type}}</td>
-            <td>
-                <a href="" class="btn btn-secondary">show</a>
-                <a href="" class="btn btn-primary">edit</a>
-                <form action="" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">
-                        delete
-                    </button>
-                </form>
-            </td>
-            </th>
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>method</th>
+                    <th>type</th>
+                    <th>action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($widgets as $widget)
+
+                <tr>
+                    <td>{{$widget->id}}</td>
+                    <td>{{$widget->name}}</td>
+                    <td>{{$widget->method}}</td>
+                    <td>{{$widget->type}}</td>
+                    <td>
+                        <a href="{{ route('show', $widget->id) }}" class="btn btn-secondary">show</a>
+                        <a href="{{ route('edit', $widget->id) }}" class="btn btn-primary">edit</a>
+                        <form action="{{ route('destroy', $widget->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">
+                                delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+
         </table>
-        @endforeach
+
     </div>
     <div class="container mx-auto p-4">
         <h1 class="text-2xl font-bold mb-4">Test Widget Execution</h1>

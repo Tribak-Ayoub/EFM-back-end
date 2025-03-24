@@ -11,7 +11,7 @@ class UpdateWidgetRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class UpdateWidgetRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "name" => 'required|string|max:255',
+            "method" => 'required|string|max:255',
+            "type" => 'required',
         ];
     }
 }
