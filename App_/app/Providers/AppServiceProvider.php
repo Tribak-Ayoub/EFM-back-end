@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Modules\Core\App\Providers\CoreServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -11,7 +12,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->register(CoreServiceProvider::class);
     }
 
     /**
