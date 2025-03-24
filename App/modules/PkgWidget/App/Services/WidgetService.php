@@ -4,6 +4,7 @@ namespace Modules\PkgWidget\App\Services;
 
 use Exception;
 use Modules\PkgWidget\Models\Apprenant;
+use Modules\PkgWidget\Models\Widget;
 
 class WidgetService
 {
@@ -37,5 +38,45 @@ class WidgetService
         } catch (Exception $e) {
             return ['error' => $e->getMessage()]; 
         }
+    }
+
+    public function getWidgets()
+    {
+        $widgets = Widget::all();
+        return $widgets;
+    }
+
+    public function getWidgetById($id)
+    {
+        return Widget::findOrFail($id);
+    }
+
+    public function createWidget(array $data)
+    {
+        $widget = Widget::create([
+            'name' => $data['name'],
+            'method' => $data['method'],
+            'type' => $data['type'],
+        ]);
+
+        return $widget;
+    }
+
+    public function updateWidget(Widget $widget, array $data)
+    {
+
+        $widget->update([
+            'name' => $data['name'],
+            'method' => $data['method'],
+            'type' => $data['type'],
+        ]);
+
+        return $widget;
+    }
+
+    public function deleteWidget(Widget $widget)
+    {
+        $widget->delete();
+        return true;
     }
 }
