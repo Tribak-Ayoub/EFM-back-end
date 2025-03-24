@@ -14,4 +14,18 @@ class WidgetController extends Controller
     {
         $this->widgetService = $widgetService;
     }
+
+    public function index(Request $request)
+    {
+        return view('PkgWidget::test');
+    }
+
+    public function execute(Request $request)
+    {
+        $method = $request->input('method_name');
+
+        $result = $this->widgetService->executeMethod($method);
+
+        return view('PkgWidget::test', compact('result'));
+    }
 }

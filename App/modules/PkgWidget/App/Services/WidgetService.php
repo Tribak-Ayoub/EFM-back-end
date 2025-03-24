@@ -2,6 +2,7 @@
 
 namespace Modules\PkgWidget\App\Services;
 
+use Exception;
 use Modules\PkgWidget\Models\Apprenant;
 
 class WidgetService
@@ -23,5 +24,18 @@ class WidgetService
             'list' => $activeApprenants,
             'total' => count($activeApprenants)
         ];
+    }
+
+    public function executeMethod($method)
+    {
+        try {
+            if (method_exists($this, $method)) {
+                return call_user_func([$this, $method]); 
+            } else {
+                throw new Exception("Method '$method' not found in WidgetService.");
+            }
+        } catch (Exception $e) {
+            return ['error' => $e->getMessage()]; 
+        }
     }
 }
