@@ -14,6 +14,13 @@ const routes = [
             import(
                 "../../modules/PkgProduct/Resources/Views/Pages/index.vue"
             ),
+    },
+    {
+        path: "/home",
+        component: () =>
+            import(
+                "../../modules/PkgProduct/Resources/Views/Pages/Home.vue"
+            ),
     }
 ];
 

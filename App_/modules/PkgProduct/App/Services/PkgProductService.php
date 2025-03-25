@@ -2,7 +2,7 @@
 
 namespace Modules\PkgProduct\App\Services;
 
-use App\Models\Product;
+use Modules\PkgProduct\App\Models\Product;
 
 class PkgProductService
 {
@@ -22,7 +22,8 @@ class PkgProductService
     {
         $query = Product::all();
 
-        return $query->paginate($perPage);
+        // return $query->paginate($perPage);
+        return $query;
     }
 
     public function getProductById($id)

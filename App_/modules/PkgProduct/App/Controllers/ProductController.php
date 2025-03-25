@@ -50,9 +50,9 @@ class ProductController extends Controller
     {
 
         $validated = $request->validate([
-            'name' => 'require',
-            'stock' => 'require',
-            'price' => 'require',
+            'name' => 'required',
+            'stock' => 'required',
+            'price' => 'required',
         ]);
 
         $product = $this->productService->createProduct($validated);

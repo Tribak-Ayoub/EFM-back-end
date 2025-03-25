@@ -1,5 +1,5 @@
 <template>
-    <button @click="toggleModal"
+    <button  @click="toggleModal(null)"
         class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         type="button">
         Add Product
@@ -9,7 +9,7 @@
         class="fixed inset-0 z-50 justify-center items-center w-full h-full bg-black bg-opacity-50 flex">
         <div class="bg-white p-6 rounded-lg w-1/3">
             <h2 class="text-2xl font-bold mb-4">Create New Product</h2>
-            <button @click="closeModal"
+            <button @click="closeModal()"
                 class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 14 14">
@@ -23,8 +23,8 @@
             <form @submit.prevent="submitProduct">
                 <div class="mb-4">
                     <label class="block text-gray-700">Name</label>
-                    <textarea v-model="form.name" class="w-full p-2 border rounded" rows="4"
-                        placeholder="Enter Product name"></textarea>
+                    <input type="text" v-model="form.name" class="w-full p-2 border rounded" rows="4"
+                        placeholder="Enter Product name">
                     <p v-if="errors.content" class="text-red-500 text-sm">{{ errors.name[0] }}</p>
                 </div>
 
@@ -52,99 +52,116 @@
         </div>
     </div>
 
-    <div>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Action</th>
-                </tr>
-
-            </thead>
-            <tbody>
-                <tr v-for="(product, index) in products" :key="product.id" class="border-t hover:bg-gray-50 text-left">
-                    <td class="py-2 px-4">{{ index + 1 }}</td>
-                    <td class="py-2 px-4">{{ product.name }}</td>
-                    <td class="py-2 px-4">{{ product.stock }}</td>
-                    <td class="py-2 px-4">{{ product.price }}</td>
-                    <td class="py-2 px-4 space-x-2">
-                        <router-link :to="`/products/${product.id}`" class="text-blue-500 hover:underline">
-                            View
-                        </router-link>
-                        <button class="text-red-500 hover:underline">
-                            Delete
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
 </template>
 
-<script>
-// export default {
-//     data() {
-//         return {
-//             isModalOpen: false,
-//             form: {
-//                 name: '',
-//                 stock: '',
-//                 price: '',
-//             },
-//             errors: {},
-//             successMessage: '',
-//             loading: false,
+<script >
+import { ref, onMounted } from "vue";
+// import axios from "axios";
+// const products = ref([]);
+
+// const errors = ref({});
+
+// const successMessage = ref("");
+// const isModalOpen = ref(false);
+// const form = ref({
+//     name: "",
+//     stock: "",
+//     price: "",
+// });
+
+// const toggleModal = () => {
+//     isModalOpen.value = false
+// };
+// const closeModal = () => {
+//     isModalOpen.value = true;
+// };
+
+// const   submitProduct = async () => {
+//             errors.value = {};
+//             successMessage.value = "";
+
+//             try {
+//                 axios.post("/api/products/store", {
+//                     name: form.value.name,
+//                     stock: form.value.stock,
+//                     price: form.value.price,
+//                 });
+
+//                 successMessage.value = "product created successfully!";
+
+//                 // setTimeout(() => router.push("/products"), 1000);
+//             } catch (error) {
+//                 if (error.response && error.response.data.errors) {
+//                     errors.value = error.response.data.errors;
+//                 }
+//             }
 //         };
-//     },
-//     methods: {
-//         toggleModal() {
-//             this.isModalOpen = !this.isModalOpen;
-//         },
-//         closeModal() {
-//             this.isModalOpen = false;
-//         },
-        // submitProduct() {
-        //     loading.value = true;
-        //     errors.value = {};
-        //     successMessage.value = "";
 
-        //     try {
-        //         axios.post("/api/products/store", {
-        //             name: form.value.name,
-        //             stock: form.value.stock,
-        //             price: form.value.price,
-        //         });
+import axios from "axios";
+const errors = ref({});
 
-        //         successMessage.value = "product created successfully!";
+const successMessage = ref("");
+export default {
+    data() {
+        return {
+            isModalOpen: false,
+            form: {
+                name: '',
+                stock: '',
+                price: '',
+            },
+            errors: {},
+            successMessage: '',
+            loading: false,
+        };
+    },
+    methods: {
+        toggleModal() {
+            this.isModalOpen = !this.isModalOpen;
+        },
+        closeModal() {
+            this.isModalOpen = false;
+        },
+        submitProduct() {
+            // loading.value = true;
+            // errors.value = {};
+            // successMessage.value = "";
 
-        //         // setTimeout(() => router.push("/products"), 1000);
-        //     } catch (error) {
-        //         if (error.response && error.response.data.errors) {
-        //             errors.value = error.response.data.errors;
-        //         }
-        //     }
-        // },
-        // fetchArticles() {
-        //     try {
-        //         const response = axios.get("/api/products");
-        //         products.value = response.data.products.data;
-        //     } catch (error) {
-        //         console.error("Error fetching products:", error);
-        //     }
-        // },
-//     },
+            errors.value = {};
+            successMessage.value = "";
+
+            try {
+                axios.post("/api/products/store", {
+                    name: form.value.name,
+                    stock: form.value.stock,
+                    price: form.value.price,
+                });
+                console.log('test ')
+
+                successMessage.value = "product created successfully!";
+
+                // setTimeout(() => router.push("/products"), 1000);
+            } catch (error) {
+                console.log('test 11')
+                if (error.response && error.response.data.errors) {
+                    errors.value = error.response.data.errors;
+                }
+            }
+        }
+    },
 
  
-// };
+};
 </script>
 
-<script setup>
+<!-- <script setup>
 
 import {ref, onMounted } from 'vue';
 import axios from "axios";
 
+const errors = ref({});
+
+const successMessage = ref("");
 const  isModalOpen = ref(false);
 const products = ref([]);
 const form = ref({
@@ -153,20 +170,18 @@ const form = ref({
     price: "",
 });
 
-       const toggleModal = async () => {
-            isModalOpen = !isModalOpen;
+       const toggleModal = () => {
+            isModalOpen.value = false
         };
-     const   closeModal = async () => {
-            isModalOpen = false;
+     const   closeModal() = () => {
+            isModalOpen.value = true;
         };
 
-const errors = ref({});
 
-const successMessage = ref("");
 // const isModalOpen = ref(false);
 
 
-const fetchArticles = async () => {
+const fetchProducts = async () => {
             try {
                 const response = await axios.get("/api/products");
                 products.value = response.data.products;
@@ -197,5 +212,5 @@ const fetchArticles = async () => {
                 loading.value = false;
             }
     }
-    onMounted(fetchArticles);
-</script>
+    onMounted(fetchProducts);
+</script> -->
