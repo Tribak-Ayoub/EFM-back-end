@@ -7,6 +7,13 @@ const routes = [
             import(
                 "../../modules/PkgProduct/Resources/Views/Pages/Test.vue"
             ),
+    },
+    {
+        path: "/index",
+        component: () =>
+            import(
+                "../../modules/PkgProduct/Resources/Views/Pages/index.vue"
+            ),
     }
 ];
 
