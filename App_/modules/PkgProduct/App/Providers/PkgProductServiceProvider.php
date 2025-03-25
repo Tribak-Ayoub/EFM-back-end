@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Core\App\Providers;
+namespace Modules\PkgProduct\App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class CoreServiceProvider extends ServiceProvider
+class PkgProductServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -25,6 +25,6 @@ class CoreServiceProvider extends ServiceProvider
             $this->loadRoutesFrom($routeFile);
         }
         
-        $this->loadViewsFrom(__DIR__ . '/../../Resources/Views', 'core');
+        $this->loadViewsFrom(__DIR__ . '/../../Resources/Views', 'PkgProduct');
     }
 }

@@ -5,7 +5,7 @@ const routes = [
         path: "/test",
         component: () =>
             import(
-                "../../modules/Core/Resources/Views/Pages/Test.vue"
+                "../../modules/PkgProduct/Resources/Views/Pages/Test.vue"
             ),
     }
 ];
