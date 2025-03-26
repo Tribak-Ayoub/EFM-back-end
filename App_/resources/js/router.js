@@ -9,13 +9,6 @@ const routes = [
             ),
     },
     {
-        path: "/index",
-        component: () =>
-            import(
-                "../../modules/PkgProduct/Resources/Views/Pages/index.vue"
-            ),
-    },
-    {
         path: "/home",
         component: () =>
             import(

@@ -29,10 +29,10 @@ class ProductController extends Controller
 
     public function index()
     {
-        $product = $this->productService->paginate();
+        $products = $this->productService->paginate();
 
         return response()->json([
-            'product' => $product,
+            'products' => $products,
         ]);
 
     }
