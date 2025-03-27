@@ -33,16 +33,19 @@ class LivreController extends Controller
      */
     public function store(StoreLivreRequest $request)
     {
-        try {
-            $validated = $request->validated();
-            $livre = Livre::create($validated);
-            dd($livre);
-            return $livre;
+        $validated = $request->validated();
+        $livre = Livre::create($validated);
+        return $livre;
+
+        // try {
+        //     $validated = $request->validated();
+        //     $livre = Livre::create($validated);
+        //     dd($livre);
+        //     return $livre;
             
-        } catch (Error) {
-            dd(Error);
-            return $e;
-        }
+        // } catch (Error) {
+        //     return ;
+        // }
     }
 
     /**
