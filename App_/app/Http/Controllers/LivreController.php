@@ -16,7 +16,9 @@ class LivreController extends Controller
      */
     public function index()
     {
-        $livres = Livre::all();
+        $perPage = 10;
+        $livres = Livre::latest()->paginate($perPage);
+               
         return view('index', compact('livres'));
     }
 
@@ -33,19 +35,11 @@ class LivreController extends Controller
      */
     public function store(StoreLivreRequest $request)
     {
-        $validated = $request->validated();
-        $livre = Livre::create($validated);
-        return $livre;
 
-        // try {
-        //     $validated = $request->validated();
-        //     $livre = Livre::create($validated);
-        //     dd($livre);
-        //     return $livre;
-            
-        // } catch (Error) {
-        //     return ;
-        // }
+        $validated = $request->validated();
+        Livre::create($validated);
+        return redirect()->route('index')->with('seccusse', 'livre created');
+
     }
 
     /**
