@@ -13,6 +13,7 @@
 
     <div class="">
         <form action="{{route('store')}}" method="POST" class="w-75">
+            @csrf
             <div class="grid gap-6 mb-6 md:grid-cols-1">
                 <div>
                     <label for="titre" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Titre</label>

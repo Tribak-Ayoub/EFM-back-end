@@ -22,7 +22,7 @@ class StoreLivreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'titre' => 'required',
+            'titre' => 'string|required',
             'auteur' => 'required',
             'nombre_pages' => 'required',
             'categorie' => 'required',

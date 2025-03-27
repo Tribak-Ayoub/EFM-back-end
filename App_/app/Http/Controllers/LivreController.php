@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Livre;
 use App\Http\Requests\StoreLivreRequest;
 use App\Http\Requests\UpdateLivreRequest;
+use Error;
 use Pest\Support\View;
+use Psy\Readline\Hoa\Console;
 
 class LivreController extends Controller
 {
@@ -31,9 +33,16 @@ class LivreController extends Controller
      */
     public function store(StoreLivreRequest $request)
     {
-        $validated = validate([
+        try {
+            $validated = $request->validated();
+            $livre = Livre::create($validated);
+            dd($livre);
+            return $livre;
             
-        ]);
+        } catch (Error) {
+            dd(Error);
+            return $e;
+        }
     }
 
     /**

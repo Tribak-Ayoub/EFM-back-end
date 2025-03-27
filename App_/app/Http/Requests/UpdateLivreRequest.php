@@ -11,7 +11,7 @@ class UpdateLivreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class UpdateLivreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'titre' => 'required',
+            'auteur' => 'required',
+            'nombre_pages' => 'required',
+            'categorie' => 'required',
         ];
     }
 }
