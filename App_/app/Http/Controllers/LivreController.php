@@ -1,0 +1,70 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Livre;
+use App\Http\Requests\StoreLivreRequest;
+use App\Http\Requests\UpdateLivreRequest;
+use Pest\Support\View;
+
+class LivreController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $livres = Livre::all();
+        return view('index', compact('livres'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StoreLivreRequest $request)
+    {
+        $validated = validate([
+            
+        ]);
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Livre $livre)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Livre $livre)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdateLivreRequest $request, Livre $livre)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Livre $livre)
+    {
+        //
+    }
+}
